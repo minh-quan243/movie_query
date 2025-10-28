@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Search Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="search-container">
+    <h1>🎬 Movie Search Engine</h1>
+    <form action="{{ url_for('search') }}" method="get">
+    <input type="text" name="q" placeholder="Search for a movie..." required>
+        <button type="submit">🔍 Search</button>
+    </form>
+</div>
+</body>
+</html>

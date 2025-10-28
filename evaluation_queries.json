@@ -1,0 +1,14 @@
+[
+  {
+    "query": "romantic comedy",
+    "relevant": [ 0 ]
+  },
+  {
+    "query": "teen drama",
+    "relevant": [ 1 ]
+  },
+  {
+    "query": "basketball",
+    "relevant": [ 2 ]
+  }
+]
