@@ -17,11 +17,11 @@
         </form>
     </div>
 
-    {% if results is not none and not results.empty %}
+    {% if results and results|length > 0 %}
     <div class="movie-grid">
-        {% for movie in results.itertuples() %}
-        <div class="movie-card">
-            <!-- Ảnh poster -->
+        {% for movie in results %}
+        <a href="{{ url_for('movie_detail', movie_id=movie.id) }}" class="movie-card">
+        <!-- Ảnh poster -->
             <img src="{{ movie.poster or movie.poster_url or url_for('static', filename='img/no_poster.jpg') }}"
                  alt="{{ movie.title }}">
 
@@ -29,10 +29,16 @@
             <div class="movie-info">
                 <h3>{{ movie.title }}</h3>
                 <p><b>Genre:</b> {{ movie.genre }}</p>
+
+                {% if movie.similarity_score is defined and movie.similarity_score %}
                 <p class="similarity">Similarity: {{ "%.3f"|format(movie.similarity_score) }}</p>
+                {% endif %}
+
+                {% if movie.plot %}
                 <p>{{ movie.plot[:150] }}...</p>
+                {% endif %}
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
@@ -44,29 +50,29 @@
 
         {% set display_pages = [] %}
         {% for p in range(1, total_pages + 1) %}
-            {% if p <= 3 or p > total_pages - 3 or (p >= page - 1 and p <= page + 1) %}
-                {% do display_pages.append(p) %}
-            {% endif %}
+        {% if p <= 3 or p > total_pages - 3 or (p >= page - 1 and p <= page + 1) %}
+        {% do display_pages.append(p) %}
+        {% endif %}
         {% endfor %}
 
         {% set last = 0 %}
         {% for p in display_pages %}
-            {% if p - last > 1 %}
-                <span class="dots">...</span>
-            {% endif %}
-            {% if p == page %}
-                <strong>{{ p }}</strong>
-            {% else %}
-                <a href="{{ url_for('search', query=query, page=p) }}">{{ p }}</a>
-            {% endif %}
-            {% set last = p %}
+        {% if p - last > 1 %}
+        <span class="dots">...</span>
+        {% endif %}
+        {% if p == page %}
+        <strong>{{ p }}</strong>
+        {% else %}
+        <a href="{{ url_for('search', query=query, page=p) }}">{{ p }}</a>
+        {% endif %}
+        {% set last = p %}
         {% endfor %}
-
 
         {% if page < total_pages %}
         <a href="{{ url_for('search', query=query, page=page+1) }}">Sau &raquo;</a>
         {% endif %}
     </div>
+
     {% else %}
     <p>Không tìm thấy kết quả nào cho từ khóa "{{ query }}".</p>
     {% endif %}

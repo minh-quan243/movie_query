@@ -1,5 +1,5 @@
 import json
-from process import search_tfidf_weighted
+from process import smart_search
 
 def precision_at_k(results, relevant, k=10):
     hits = sum(1 for doc_id, _ in results[:k] if doc_id in relevant)
@@ -20,7 +20,7 @@ def evaluate():
     precisions, maps = [], []
 
     for q in queries:
-        df = search_tfidf_weighted(q["query"], min_score=0.0)
+        df = smart_search(q["query"], min_score=0.0)
         results = [(idx, row["similarity_score"]) for idx, row in df.iterrows()]
 
         p10 = precision_at_k(results, q["relevant"], 10)

@@ -2,16 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movie Search Engine</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>🎬 Movie Search Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css') }}">
 </head>
 <body>
 <div class="search-container">
     <h1>🎬 Movie Search Engine</h1>
+    <p>
+        Khám phá thế giới điện ảnh — tìm kiếm thông minh theo <b>thể loại</b>, <b>diễn viên</b>, <b>năm</b> hoặc <b>nội dung phim</b>!
+        Xem ngay các bộ phim được đánh giá cao nhất hôm nay 🔥
+    </p>
     <form action="{{ url_for('search') }}" method="get">
-    <input type="text" name="q" placeholder="Search for a movie..." required>
-        <button type="submit">🔍 Search</button>
+        <input type="text" name="query" placeholder="Nhập tên phim, diễn viên hoặc thể loại..." required>
+        <button type="submit">🔍 Tìm kiếm</button>
     </form>
 </div>
+
+<!-- ========== TOP 10 PHIM NỔI BẬT ========== -->
+<div class="section">
+    <h2>⭐ Top 10 phim nổi bật</h2>
+    <div class="carousel-container">
+        <button class="nav-btn left">&#10094;</button>
+        <div class="movie-row">
+            {% for movie in top_movies %}
+            <div class="movie-card">
+                <img src="{{ movie.poster or url_for('static', filename='img/no_poster.jpg') }}" alt="{{ movie.title }}">
+                <h4>{{ movie.title }}</h4>
+                <p>⭐ {{ movie.rating }} | 👥 {{ movie.vote_count }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="nav-btn right">&#10095;</button>
+    </div>
+</div>
+
+<!-- ========== CÁC THỂ LOẠI ========== -->
+{% for genre, movies in genre_sections.items() %}
+<div class="section">
+    <h2>{{ genre }}</h2>
+    <div class="carousel-container">
+        <button class="nav-btn left">&#10094;</button>
+        <div class="movie-row">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <img src="{{ movie.poster or url_for('static', filename='img/no_poster.jpg') }}" alt="{{ movie.title }}">
+                <h4>{{ movie.title }}</h4>
+                <p>⭐ {{ movie.rating }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="nav-btn right">&#10095;</button>
+    </div>
+</div>
+{% endfor %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
