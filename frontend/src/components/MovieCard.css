@@ -1,0 +1,183 @@
+.movie-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 220px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.movie-card:hover {
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.3);
+  border-color: var(--accent-color);
+  transform: translateY(-8px) scale(1.02);
+}
+
+.movie-card.selection-mode:hover {
+  transform: none !important;
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.3);
+}
+
+.movie-card.selection-mode:hover .movie-card-image {
+  transform: none !important;
+}
+
+.movie-checkbox {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.movie-checkbox.show {
+  opacity: 0.4;
+  pointer-events: auto;
+}
+
+.movie-checkbox:hover {
+  opacity: 1 !important;
+  background: rgba(0, 0, 0, 0.85);
+  border-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+.movie-checkbox.selected {
+  opacity: 1;
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  pointer-events: auto;
+}
+
+.movie-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.movie-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--secondary-bg);
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-card-image {
+  transform: scale(1.1);
+}
+
+.movie-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent 30%, transparent 70%, rgba(0,0,0,0.8));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-card-overlay {
+  opacity: 1;
+}
+
+.movie-card-rating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+.star {
+  color: #ffd700;
+  font-size: 1rem;
+}
+
+.movie-card-info {
+  padding: 1rem;
+}
+
+.movie-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  min-height: 2.8em;
+}
+
+.movie-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.dot {
+  color: var(--text-secondary);
+}
+
+.movie-card-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.genre-tag {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    width: 160px;
+  }
+
+  .movie-card-title {
+    font-size: 0.9rem;
+  }
+}

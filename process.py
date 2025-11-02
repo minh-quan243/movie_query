@@ -68,7 +68,7 @@ if os.path.exists(DB_PATH) and os.path.exists(VEC_PATH) and os.path.exists(MATRI
 else:
     print("⚙️ Không tìm thấy dữ liệu cũ — khởi tạo từ CSV...")
 
-    data_dir = r"D:\Quân\project\movie_query\MovieData"
+    data_dir = r"MovieData/"
     all_files = glob.glob(os.path.join(data_dir, "movies_out_*.csv"))
     df_list = [pd.read_csv(f) for f in all_files]
     combined_df = pd.concat(df_list, ignore_index=True)

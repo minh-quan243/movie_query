@@ -1,0 +1,119 @@
+.crop-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  backdrop-filter: blur(5px);
+}
+
+.crop-modal {
+  background: var(--secondary-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.crop-modal h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.crop-container {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  min-height: 300px;
+}
+
+.ReactCrop {
+  max-width: 100%;
+  max-height: 60vh;
+}
+
+.ReactCrop__crop-selection {
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.5);
+}
+
+.crop-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.crop-cancel-button,
+.crop-save-button {
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.crop-cancel-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.crop-cancel-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.crop-save-button {
+  background: var(--accent-color);
+  color: var(--primary-bg);
+}
+
+.crop-save-button:hover {
+  background: #00b8e6;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .crop-modal {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+
+  .crop-modal h2 {
+    font-size: 1.3rem;
+  }
+
+  .crop-container {
+    min-height: 250px;
+  }
+
+  .crop-actions {
+    flex-direction: column;
+  }
+
+  .crop-cancel-button,
+  .crop-save-button {
+    width: 100%;
+  }
+}
