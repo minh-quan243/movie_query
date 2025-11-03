@@ -1,0 +1,100 @@
+export const sampleMovies = [
+  {
+    id: '1',
+    tmdb_id: 550,
+    imdb_id: 'tt0137523',
+    title: 'Fight Club',
+    original_title: 'Fight Club',
+    poster_path: '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+    backdrop_path: '/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg',
+    year: 1999,
+    runtime: 139,
+    rating: 8.4,
+    votes: 27000,
+    director: 'David Fincher',
+    writers: ['Chuck Palahniuk', 'Jim Uhls'],
+    cast_members: ['Brad Pitt', 'Edward Norton', 'Helena Bonham Carter', 'Meat Loaf', 'Jared Leto'],
+    plot: 'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+    genres: ['Drama'],
+    tags: ['psychological', 'underground', 'rebellion'],
+    keywords: ['fight club', 'split personality', 'nihilism', 'consumerism'],
+    mpa_rating: 'R',
+    mpa_reason: 'disturbing and graphic depiction of violent anti-social behavior',
+    awards: 'Nominated for 1 Oscar',
+    languages: ['English'],
+    production_companies: ['Fox 2000 Pictures', 'Regency Enterprises'],
+    production_countries: ['United States', 'Germany'],
+    trailer_youtube_key: 'BdJKm16Co6M',
+    trailer_imdb_url: 'https://www.imdb.com/title/tt0137523/videogallery',
+  },
+  {
+    id: '2',
+    tmdb_id: 13,
+    imdb_id: 'tt0109830',
+    title: 'Forrest Gump',
+    original_title: 'Forrest Gump',
+    poster_path: '/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg',
+    backdrop_path: '/3h1JZGDhZ8nzxdgvkxha0qBqi05.jpg',
+    year: 1994,
+    runtime: 142,
+    rating: 8.8,
+    votes: 25000,
+    director: 'Robert Zemeckis',
+    writers: ['Winston Groom', 'Eric Roth'],
+    cast_members: ['Tom Hanks', 'Robin Wright', 'Gary Sinise', 'Mykelti Williamson', 'Sally Field'],
+    plot: 'The presidencies of Kennedy and Johnson, the Vietnam War, and other historical events unfold from the perspective of an Alabama man with an IQ of 75.',
+    genres: ['Drama', 'Romance'],
+    tags: ['inspirational', 'historical', 'heartwarming'],
+    keywords: ['vietnam war', 'mentally disabled', 'running', 'shrimp boat'],
+    mpa_rating: 'PG-13',
+    mpa_reason: 'drug content, some sensuality and war violence',
+    awards: 'Won 6 Oscars',
+    languages: ['English'],
+    production_companies: ['Paramount Pictures'],
+    production_countries: ['United States'],
+    trailer_youtube_key: 'bLvqoHBptjg',
+    trailer_imdb_url: 'https://www.imdb.com/title/tt0109830/videogallery',
+  },
+  {
+    id: '3',
+    tmdb_id: 155,
+    imdb_id: 'tt0468569',
+    title: 'The Dark Knight',
+    original_title: 'The Dark Knight',
+    poster_path: '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+    backdrop_path: '/hkBaDkMWbLaf8B1lsWsKX7Ew3Xq.jpg',
+    year: 2008,
+    runtime: 152,
+    rating: 9.0,
+    votes: 30000,
+    director: 'Christopher Nolan',
+    writers: ['Jonathan Nolan', 'Christopher Nolan', 'David S. Goyer'],
+    cast_members: ['Christian Bale', 'Heath Ledger', 'Aaron Eckhart', 'Michael Caine', 'Gary Oldman'],
+    plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.',
+    genres: ['Action', 'Drama'],
+    tags: ['superhero', 'dark', 'crime'],
+    keywords: ['joker', 'batman', 'gotham', 'vigilante', 'chaos'],
+    mpa_rating: 'PG-13',
+    mpa_reason: 'intense sequences of violence and some menace',
+    awards: 'Won 2 Oscars',
+    languages: ['English', 'Mandarin'],
+    production_companies: ['Warner Bros.', 'Legendary Pictures', 'Syncopy'],
+    production_countries: ['United States', 'United Kingdom'],
+    trailer_youtube_key: 'EXeTwQWrcwY',
+    trailer_imdb_url: 'https://www.imdb.com/title/tt0468569/videogallery',
+  },
+];
+
+export const seedDatabase = async (supabase) => {
+  try {
+    const { data, error } = await supabase
+      .from('movies')
+      .insert(sampleMovies);
+
+    if (error) throw error;
+    console.log('Sample movies seeded successfully');
+    return data;
+  } catch (error) {
+    console.error('Error seeding database:', error);
+  }
+};

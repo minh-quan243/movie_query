@@ -1,0 +1,126 @@
+.movie-carousel {
+  margin-bottom: 3rem;
+}
+
+.carousel-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  padding: 0 2rem;
+}
+
+.carousel-container {
+  position: relative;
+  padding: 0;
+}
+
+.carousel-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 2rem 4rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4rem, black calc(100% - 4rem), transparent);
+  mask-image: linear-gradient(to right, transparent, black 4rem, black calc(100% - 4rem), transparent);
+}
+
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-button svg {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.carousel-button:hover svg {
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.6));
+}
+
+.carousel-button.left::before,
+.carousel-button.right::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-button.left::before {
+  left: -25px;
+  background: radial-gradient(ellipse at left, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+}
+
+.carousel-button.right::before {
+  right: -25px;
+  background: radial-gradient(ellipse at right, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+}
+
+.carousel-button:hover::before {
+  opacity: 1;
+}
+
+.carousel-button.left {
+  left: 0.5rem;
+}
+
+.carousel-button.right {
+  right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .carousel-title {
+    font-size: 1.4rem;
+    padding: 0 1rem;
+  }
+
+  .carousel-container {
+    padding: 0 2rem;
+  }
+
+  .carousel-scroll {
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .carousel-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-button svg {
+    width: 20px;
+    height: 20px;
+  }
+}

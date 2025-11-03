@@ -19,9 +19,9 @@ from sklearn.metrics.pairwise import linear_kernel
 # =====================================
 # Đường dẫn file database & model TF-IDF
 # =====================================
-DB_PATH = r"D:\Quân\project\movie_query\checkpoints\movies.db"
-VEC_PATH = r"D:\Quân\project\movie_query\checkpoints\vectorizer.pkl"
-MATRIX_PATH = r"D:\Quân\project\movie_query\checkpoints\tfidf_matrix.pkl"
+DB_PATH = r"checkpoints/movies.db"
+VEC_PATH = r"checkpoints/vectorizer.pkl"
+MATRIX_PATH = r"checkpoints/tfidf_matrix.pkl"
 
 # =====================================
 # Chuẩn bị NLP
@@ -68,7 +68,7 @@ if os.path.exists(DB_PATH) and os.path.exists(VEC_PATH) and os.path.exists(MATRI
 else:
     print("⚙️ Không tìm thấy dữ liệu cũ — khởi tạo từ CSV...")
 
-    data_dir = r"D:\Quân\project\movie_query\MovieData"
+    data_dir = r"MovieData/"
     all_files = glob.glob(os.path.join(data_dir, "movies_out_*.csv"))
     df_list = [pd.read_csv(f) for f in all_files]
     combined_df = pd.concat(df_list, ignore_index=True)
