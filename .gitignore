@@ -1,2 +1,10 @@
 __pycache__/
 .idea/
+.venv/
+*.DS_Store
+node_modules/
+dist/
+
+fetch_tmdb_trailers.py
+modify_tmdb_trailers.py
+init_auth_db.py
