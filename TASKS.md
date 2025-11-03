@@ -1,61 +1,11 @@
-# TASKS:
-## Build a movie list database like IMDB. The page should contain:
-    ```
-    - Landing page (./landing)
-    - Home page (./home)
-    - Movie search output page (./search)
-    - Specific movie's information page (./movie/<title id>).
-    ```
-### The Web app will be branded as `MovieVerse`
-### 1. Landing page:
-- The landing page should have a glowing line like it's the event horizon of a blackhole and the background should have soft glow with star glitter.
-- Above that will be the title "MovieVerser" with small description below it, "Unfolding the universe of movies". Below them is Getting Started button.
-- Make a circular custom cursor that move softly, smoothly, it will move slower than actual cursor (device's cursor).
-For references, check LandingPage_Example.png
-### 2. Home page:
-- Persistent Search Bar: Always visible at the top, so users can immediately search.
-- Featured section which will show top rating movies, 20 of them will be shown here.
-- Genre sections: Show popular genres (20 movies each)
-    - Action
-    - Drama
-    - Animation
-    - Sci-fi
-    - Horror
-    - Comedy
-    - Romance
-### 3. Movie search output page
-- Filters & Quick Access
-    - Genre chips/tags (e.g., Action, Sci-Fi, Romance).
-    - Year slider or “2020s / 2010s / 2000s” clickable shortcuts.
-- And show result as cards
-### 4. Specific movie's information page
-- Show all information about movie:
-    - Poster
-    - Title
-    - Original Title
-    - Year (Release)
-    - Screen time
-    - Rating
-    - Votes (Rating count)
-    - Director
-    - Writer(s)
-    - Casts
-    - Plot
-    - Genres
-    - Tags
-    - Keywords
-    - MPA rating
-    - MPA rated reason
-    - Awards
-    - Language(s)
-    - Production companies
-    - Production countries
-- Trailer zone: use `iframe` for Youtube link and use button `Watch trailer on IMDb` as fallback version in case link unavailable.
-- Comment section
-### Movie Cards
-- Show poster
-- Title
-- Year
-- Screen time
-- Rating
-- Genres
+1. Create a `requirements.txt` file in the project root.
+2. Create shell script for macOS and Windows that will take care of setting up the virtual environment and installing dependencies and start the web app inside `start_server/`. It will:
+    - Create and activate a virtual environment.
+    - Install dependencies from `requirements.txt`.
+    - Download the spaCy model.
+    - Navigate to the `frontend/` directory.
+    - Install Node.js dependencies.
+    - Build the frontend.
+    - Start the Flask backend server.
+    
+    Note that for dependencies installation, it should check if the virtual environment is already set up or dependencies already installed to avoid redundant installations, this also apply for Node.js dependencies. Because to start the web app, user will run this script multiple times.

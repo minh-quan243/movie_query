@@ -317,7 +317,7 @@ const MovieDetailPage = () => {
           <div className="similar-movies-section">
             <h3>Similar Movies</h3>
             <div className="similar-movies-list">
-              {similarMovies.slice(0, 5).map((similarMovie) => {
+              {similarMovies.slice(0, 20).map((similarMovie) => {
                 const similarPosterUrl = getPosterUrl(similarMovie.poster_url)?.replace('_V1_UX500_', '_V1_UX160_');
                 return (
                   <a

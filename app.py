@@ -389,26 +389,26 @@ def get_all_genres():
         # Curated genre lists with well-known movies (balanced rating + popularity)
         genre_ids = {
             "Action": [
-                'tt1375666',  # Inception
-                'tt0133093',  # The Matrix
-                'tt0172495',  # Gladiator
-                'tt9362722',  # Spider-Man: Across the Spider-Verse
-                'tt4633694',  # Spider-Man: Into the Spider-Verse
-                'tt15239678',  # Dune: Part Two
-                'tt0468569',  # The Dark Knight
-                'tt1345836',  # The Dark Knight Rises
-                'tt0245429',  # Spirited Away (Action/Adventure)
-                'tt0816692',  # Interstellar
-                'tt0120689',  # The Green Mile
-                'tt0137523',  # Fight Club
-                'tt0482571',  # The Prestige
-                'tt0407887',  # The Departed
-                'tt0120815',  # Saving Private Ryan
-                'tt3315342',  # Logan
-                'tt1392190',  # Mad Max: Fury Road
-                'tt0110912',  # Pulp Fiction
-                'tt0364569',  # Oldboy
-                'tt0245429',  # Spirited Away
+                'tt10366206',  # John Wick: Chapter 4
+                'tt9603208',  # Mission: Impossible – The Final Reckoning
+                'tt7888964',  # Nobody
+                'tt12593682',  # Bullet Train
+                'tt7991608',  # Red Notice
+                'tt29603959',  # Novocaine
+                'tt0356910',  # Mr. & Mrs. Smith
+                'tt1684562',  # The Fall Guy
+                'tt0266697',  # Kill Bill: Vol. 1
+                'tt4919268',  # Bad Boys: Ride or Die
+                'tt13314558',  # Day Shift
+                'tt6499752',  # Upgrade
+                'tt15314262',  # The Beekeeper
+                'tt4139588',  # Polar
+                'tt8106534',  # 6 Underground
+                'tt8385148',  # The Hitman's Wife's Bodyguard
+                'tt7737528',  # KATE
+                'tt1013743',  # Knight and Day
+                'tt4463894',  # Shaft
+                'tt6334354',  # The Suicide Squad
             ],
             "Drama": [
                 'tt0137523',  # Fight Club
@@ -441,18 +441,19 @@ def get_all_genres():
                 'tt1049413',  # Up
                 'tt0119698',  # Princess Mononoke
                 'tt2380307',  # Coco
-                'tt1049413',  # Up
                 'tt0114709',  # Toy Story
                 'tt0317705',  # The Incredibles
                 'tt0382932',  # Ratatouille
                 'tt0325980',  # Pirates of the Caribbean: The Curse of the Black Pearl
-                'tt1130884',  # Shrek
-                'tt0892769',  # How to Train Your Dragon
-                'tt1201607',  # Harry Potter and the Deathly Hallows: Part 2
                 'tt2103281',  # Puss in Boots
-                'tt1291150',  # Frozen
-                'tt2948356',  # Zootopia
+                'tt5113040',  # The Secret Life of Pets 2
+                'tt30017619',  # The Bad Guys 2
                 'tt29623480',  # The Wild Robot
+                'tt6587046',  # The Boy and the Heron
+                'tt10954718',  # Dog Man
+                'tt6467266',  # Sing 2
+                'tt5220122',  # Hotel Transylvania: Summer Vacation
+                'tt3915174',  # Puss in Boots: The Last Wish
             ],
             "Sci-Fi": [
                 'tt1375666',  # Inception
@@ -644,16 +645,31 @@ def get_movie_detail(movie_id):
         elif "trailer" in movie and movie["trailer"] and "youtube.com" in str(movie["trailer"]):
             trailer_url = movie["trailer"]
         
-        # Find similar movies by genre
+        # Find similar movies by genre, prioritizing popular movies
         similar_movies = []
         if "genre" in movie and movie["genre"]:
-            genre = str(movie["genre"]).split(",")[0].strip()
+            # Get all genres from the current movie
+            genres = [g.strip().lower() for g in str(movie["genre"]).split(",")]
+            
+            # Filter movies that share at least one genre
             similar_df = combined_df[
-                combined_df["genre"].apply(lambda x: genre.lower() in str(x).lower())
+                combined_df["genre"].apply(
+                    lambda x: any(g in str(x).lower() for g in genres) if pd.notna(x) else False
+                )
             ]
+            
             # Exclude current movie
             similar_df = similar_df[similar_df["id"] != movie_id]
-            similar_movies = clean_movie_data(similar_df.head(8))
+            
+            # Sort by popularity and vote_count to get well-known movies
+            # First by vote_count (minimum threshold for credibility), then by rating
+            similar_df = similar_df[similar_df["vote_count"] > 50000]  # Only movies with significant votes
+            similar_df = similar_df.sort_values(
+                by=["rating", "vote_count"], 
+                ascending=[False, False]
+            )
+            
+            similar_movies = clean_movie_data(similar_df.head(12))
         
         return jsonify({
             "success": True,
