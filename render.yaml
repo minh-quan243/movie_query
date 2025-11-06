@@ -1,11 +1,11 @@
 services:
   # Web Service (Flask + React)
   - type: web
-    name: movie-query-app
+    name: movieverse
     env: python
     region: singapore
     plan: free
-    branch: main
+    branch: deployment
     buildCommand: "./build.sh"
     startCommand: "gunicorn app:app"
     envVars:
