@@ -4,7 +4,9 @@ __pycache__/
 *.DS_Store
 node_modules/
 dist/
-
+ignores/
 fetch_tmdb_trailers.py
 modify_tmdb_trailers.py
 init_auth_db.py
+MOVIEDATA.md
+SEARCHENGINE.md

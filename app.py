@@ -14,8 +14,13 @@ from datetime import datetime, timedelta
 
 # Configure Flask to serve React build files
 app = Flask(__name__, static_folder='frontend/dist', static_url_path='')
-app.secret_key = 'dev-secret-key-change-in-production'  # WARNING: Change in production!
-CORS(app, supports_credentials=True, origins=['http://localhost:5173', 'http://127.0.0.1:8000'])  # Enable CORS with credentials
+
+# Production-ready secret key
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
+
+# CORS configuration - Update for production
+allowed_origins = os.environ.get('ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:8000').split(',')
+CORS(app, supports_credentials=True, origins=allowed_origins)
 
 DB_PATH = "checkpoints/movies.db"
 
@@ -726,4 +731,8 @@ if __name__ == "__main__":
         print("\n⚠️  WARNING: Frontend build not found!")
         print("Please run: cd frontend && npm run build\n")
     
-    app.run(debug=True, port=8000)
+    # Get port from environment or default to 8000
+    port = int(os.environ.get('PORT', 8000))
+    debug = os.environ.get('FLASK_ENV') != 'production'
+    
+    app.run(debug=debug, host='0.0.0.0', port=port)

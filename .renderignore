@@ -1,0 +1,32 @@
+# Files to ignore during Render deployment
+
+# Development files
+.venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+.DS_Store
+
+# Frontend development
+frontend/node_modules/
+frontend/.env.local
+frontend/.env.development
+
+# Local development
+*.log
+.env.local
+
+# Documentation (optional - can include if wanted)
+# MOVIEDATA.md
+# SEARCHENGINE.md
+
+# Scripts not needed in production
+MovieData/crawler.py
+fetch_tmdb_trailers.py
+modify_tmdb_trailers.py
+init_auth_db.py
+
+# Git files
+.git/
+.gitignore
